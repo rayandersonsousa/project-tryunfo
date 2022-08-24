@@ -31,9 +31,7 @@ class Card extends React.Component {
         <p data-testid="rare-card">
           { cardRare }
         </p>
-        <div>
-          { cardTrunfo ? <span data-testid="trunfo-card">Super Trunfo</span> : '' }
-        </div>
+        {cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : ''}
       </section>
     );
   }
