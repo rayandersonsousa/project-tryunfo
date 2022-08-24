@@ -12,6 +12,7 @@ class App extends React.Component {
     cardImage: '',
     cardRare: '',
     cardTrunfo: false,
+    cards: [],
   };
 
   handleChange = (event) => {
@@ -19,6 +20,30 @@ class App extends React.Component {
     const { type, name, value } = target;
     const valor = type === 'checkbox' ? target.checked : value;
     this.setState({ [name]: valor });
+  };
+
+  saveCard = () => {
+    const { cardName, cardDescription, cardAttr1, cardAttr2,
+      cardAttr3, cardImage, cardRare } = this.state;
+
+    const cardObject = { cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare };
+
+    this.setState((prevState) => ({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: '',
+      cards: [...prevState.cards, cardObject],
+    }));
   };
 
   attributes = (attr1, attr2, attr3) => {
@@ -60,6 +85,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ !this.saveButton(formTrue, attributeTrue) }
+          onSaveButtonClick={ this.saveCard }
         />
         <Card
           cardName={ cardName }
