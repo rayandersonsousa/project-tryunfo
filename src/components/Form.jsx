@@ -4,8 +4,22 @@ import PropTypes from 'prop-types';
 class Form extends React.Component {
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo, /* hasTrunfo, */ isSaveButtonDisabled, onInputChange,
+      cardRare, cardTrunfo, hasTrunfo, isSaveButtonDisabled, onInputChange,
       onSaveButtonClick } = this.props;
+
+    const checkTrunfo = !hasTrunfo ? (
+      <label htmlFor="trunfo-input">
+        <p>Super Trunfo</p>
+        <input
+          name="cardTrunfo"
+          type="checkbox"
+          data-testid="trunfo-input"
+          id="trunfo-input"
+          checked={ cardTrunfo }
+          onChange={ onInputChange }
+        />
+      </label>
+    ) : <p>Você já tem um Super Trunfo em seu baralho</p>;
 
     return (
       <form>
@@ -60,13 +74,7 @@ class Form extends React.Component {
           <option value="raro">raro</option>
           <option value="muito raro">muito raro</option>
         </select>
-        <input
-          type="checkbox"
-          data-testid="trunfo-input"
-          name="cardTrunfo"
-          checked={ cardTrunfo }
-          onChange={ onInputChange }
-        />
+        { checkTrunfo }
         <button
           type="button"
           data-testid="save-button"
